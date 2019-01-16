@@ -60,6 +60,16 @@ Settings.Global.getInt(context.contentResolver, "force_fsg_nav_bar", 0)
 ```
 
 ### 异形屏
+- AndroidP：`是否异型屏`
+```
+        WindowInsets windowInsets = window.getDecorView().getRootWindowInsets();
+        if(null == windowInsets){
+            return false;
+        }
+        DisplayCutout displayCutout = windowInsets.getDisplayCutout();
+        return null != displayCutout;
+
+```
 
 - 小米：`0:非异型，1:异型`
 ```kotlin
@@ -91,6 +101,13 @@ getContext().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
             Method get = vivoFtFeature.getMethod("isFeatureSupport", int.class);
             (boolean) get.invoke(vivoFtFeature, 0x00000020);
             
+```
+
+- 锤子（Smartisan）：`是否异型屏`
+```java
+           Class<?> DisplayUtilsSmt = Class.forName("smartisanos.api.DisplayUtilsSmt");
+           Method isFeatureSupport = DisplayUtilsSmt.getMethod("isFeatureSupport", int.class);
+           (boolean) isFeatureSupport.invoke(DisplayUtilsSmt, 0x00000001);
 ```
 
 - 三星（挖孔屏）
