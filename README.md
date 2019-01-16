@@ -31,6 +31,7 @@ Settings.Secure.getInt(context.contentResolver, "navigation_gesture_on", 0)
 ```kotlin
 Settings.Global.getInt(context.contentResolver, "force_fsg_nav_bar", 0)
 ```
+
 - 其它：`是否存在导航条`
 ```kotlin
         private fun hasNavigationBar(context: Context): Boolean {
@@ -57,7 +58,9 @@ Settings.Global.getInt(context.contentResolver, "force_fsg_nav_bar", 0)
             return hasNavigationBar
         }
 ```
+
 ### 异形屏
+
 - 小米：`0:非异型，1:异型`
 ```kotlin
 SystemProperties.get("ro.miui.notch", null)
@@ -81,12 +84,22 @@ Settings.Global.getInt(window.getContext().getContentResolver(),
 getContext().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
 ```
 
+- Vivo：`是否异型屏  圆角：0x00000008 ，凹凸：0x00000020` 
+```java
+            ClassLoader cl = window.getContext().getClassLoader();
+            vivoFtFeature = cl.loadClass("android.util.FtFeature");
+            Method get = vivoFtFeature.getMethod("isFeatureSupport", int.class);
+            (boolean) get.invoke(vivoFtFeature, 0x00000020);
+            
+```
+
 - 三星（挖孔屏）
 
   [三星手机钻孔屏适配指导](http://support-cn.samsung.com/App/DeveloperChina/notice/detail?noticeid=86)
 
 
 ### 展示刘海
+
 - 华为: `0:展示刘海，1:隐藏刘海`
 ```kotlin
 Settings.Secure.getInt(context.contentResolver, "display_notch_status", 0)
