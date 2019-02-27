@@ -109,6 +109,10 @@ getContext().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
            Method isFeatureSupport = DisplayUtilsSmt.getMethod("isFeatureSupport", int.class);
            (boolean) isFeatureSupport.invoke(DisplayUtilsSmt, 0x00000001);
 ```
+- 锤子（Smartisan）：`获取锤子手机导航栏模式  0导航栏  1手势操作`
+```java
+Settings.Global.getInt(context.getContentResolver(), "navigationbar_trigger_mode", 0);
+```
 
 - 三星（挖孔屏）
 
